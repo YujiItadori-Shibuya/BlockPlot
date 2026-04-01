@@ -1,8 +1,8 @@
 // Configuration settings for the application
 const config = {
     // Contract settings
-    CONTRACT_ADDRESS: process.env.REACT_APP_CONTRACT_ADDRESS || '0xE2B49B1a6fc0b97c64252Ca617779Ccb14a965bf',
-    ADMIN_ADDRESS: process.env.REACT_APP_ADMIN_ADDRESS || '0x7F585D7A9751a7388909Ed940E29732306A98f0c',
+    CONTRACT_ADDRESS: process.env.REACT_APP_CONTRACT_ADDRESS || '0x7a659549fC0a6A8f642493393165b69992fD4B13',
+    ADMIN_ADDRESS: process.env.REACT_APP_ADMIN_ADDRESS || '0x129d7140d2ea226ff47800e776f54019481751bf',
     
     // Network settings
     NETWORK_ID: 11155111, // Sepolia

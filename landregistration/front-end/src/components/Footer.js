@@ -47,7 +47,7 @@ const Footer = () => {
             </p>
             <div className="mt-2">
               <FaEnvelope className="me-2" />
-              rishimishra1508@gmail.com
+              swiftmindadaptrix24x7@gmail.com
             </div>
           </div>
 
@@ -57,10 +57,10 @@ const Footer = () => {
               Follow us on social media to stay updated with the latest developments.
             </p>
             <div className="d-flex justify-content-center">
-              <a href="https://github.com/Sanjay8602/Final-Year-Project" className="text-white me-3 social-icon">
+              <a href="https://github.com/YujiItadori-Shibuya/BlockPlot.git" className="text-white me-3 social-icon">
                 <FaGithub size={24} />
               </a>
-              <a href="https://www.linkedin.com/in/rishimishra1508" className="text-white social-icon">
+              <a href="https://www.linkedin.com/in/prateek-tiwari-8a5282325" className="text-white social-icon">
                 <FaLinkedin size={24} />
               </a>
             </div>

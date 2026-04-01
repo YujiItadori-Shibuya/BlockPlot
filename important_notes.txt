@@ -1,0 +1,17 @@
+truffle migrate --reset --network sepolia
+
+### 3. Update the Frontend
+After the command finishes, look at the terminal output for the **new contract address**. You must update this in your React config to point the website to the new "database."
+
+**File:** `front-end/src/config.js`
+
+http://googleusercontent.com/immersive_entry_chip/1
+
+### Summary of Changes Made
+* **Admin Privileges:** You have successfully updated `config.js` to recognize your `0x9Fa...` address as the administrator.
+* **Email Contact:** You updated `ContactPage.js` and `Footer.js` to use your preferred email address.
+* **Network Reset:** By redeploying with the verified `truffle-config.js`, you are bypassing the "already registered" blockchain state to start fresh.
+
+Once you refresh your browser and connect MetaMask, you should see the **"Admin"** badge in the navbar, and you will be able to register your first land parcel on this new contract instance.
+
+**Would you like me to help you verify the transaction on Etherscan once the new contract is deployed?**
