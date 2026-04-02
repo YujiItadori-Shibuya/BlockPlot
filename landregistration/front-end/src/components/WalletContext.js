@@ -5,7 +5,7 @@ import config from '../config';
 
 // Account names mapping - this is now moved to WalletContext for central management
 const accountNames = {
-  "0x7F585D7A9751a7388909Ed940E29732306A98f0c": "Admin",
+  "0x92Fffe14CDC25Ece0858037Ea1D905d10cced30f": "Admin",
   "0x9Fa8A01E6005607B3BCbaEB2c0f4c39a73A9AFbE": "User 1",
   "0xA8dCae3255147e26250F4b38f8dFfe3705F39F7a": "User 2",
 };

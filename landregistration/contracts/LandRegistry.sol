@@ -30,7 +30,7 @@ contract LandRegistry {
 
     // Define admin address as a constant
     address public constant ADMIN_ADDRESS =
-        0x7F585D7A9751a7388909Ed940E29732306A98f0c;
+        0x129D7140d2eA226FF47800E776f54019481751bf;
     address public admin = ADMIN_ADDRESS; // Initialize admin with constant
 
     event LandRegistered(

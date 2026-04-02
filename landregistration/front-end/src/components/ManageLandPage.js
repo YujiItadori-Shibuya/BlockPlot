@@ -46,12 +46,19 @@ const ManageLandPage = () => {
   });
   const [formErrors, setFormErrors] = useState({});
   const [transactionStatus, setTransactionStatus] = useState(null);
+  const [fetchError, setFetchError] = useState('');
 
   const fetchUserLands = useCallback(async (userAccount) => {
     if (!contract || !userAccount) return;
+    setFetchError('');
     try {
       setSectionLoading(prev => ({ ...prev, show: true }));
       const landIds = await contract.methods.getLandsByOwner(userAccount).call();
+      if (!Array.isArray(landIds) || landIds.length === 0) {
+        setUserLands([]);
+        return;
+      }
+
       const lands = await Promise.all(
         landIds.map(async (id) => {
           const land = await contract.methods.lands(id).call();
@@ -71,10 +78,13 @@ const ManageLandPage = () => {
       setUserLands(lands);
     } catch (error) {
       console.error('Error fetching user lands:', error);
+      const message = error.message || 'Unknown error';
+      setFetchError('Failed to fetch your lands. Reason: ' + message);
       setTransactionStatus({
         type: 'error',
-        message: 'Failed to fetch your lands: ' + (error.message || 'Unknown error')
+        message: 'Failed to fetch your lands: ' + message
       });
+      setUserLands([]);
     } finally {
       setSectionLoading(prev => ({ ...prev, show: false }));
     }
@@ -82,32 +92,40 @@ const ManageLandPage = () => {
 
   const fetchLandsForSale = useCallback(async () => {
     if (!contract) return;
+    setFetchError('');
     try {
       setSectionLoading(prev => ({ ...prev, explore: true }));
       const totalLands = await contract.methods.landCount().call();
       const lands = [];
       for (let i = 1; i <= totalLands; i++) {
-        const land = await contract.methods.lands(i).call();
-        if (land.isForSale) {
-          lands.push({
-            id: i,
-            plotNumber: land.plotNumber,
-            area: land.area,
-            district: land.district,
-            city: land.city,
-            state: land.state,
-            areaSqYd: land.areaSqYd,
-            owner: getAccountName(land.owner),
-          });
+        try {
+          const land = await contract.methods.lands(i).call();
+          if (land.isForSale) {
+            lands.push({
+              id: i,
+              plotNumber: land.plotNumber,
+              area: land.area,
+              district: land.district,
+              city: land.city,
+              state: land.state,
+              areaSqYd: land.areaSqYd,
+              owner: getAccountName(land.owner),
+            });
+          }
+        } catch (innerError) {
+          console.warn('Skipped invalid land index', i, innerError);
         }
       }
       setLandsForSale(lands);
     } catch (error) {
       console.error('Error fetching lands for sale:', error);
+      const message = error.message || 'Unknown error';
+      setFetchError('Failed to fetch lands for sale. Reason: ' + message);
       setTransactionStatus({
         type: 'error',
-        message: 'Failed to fetch lands for sale: ' + (error.message || 'Unknown error')
+        message: 'Failed to fetch lands for sale: ' + message
       });
+      setLandsForSale([]);
     } finally {
       setSectionLoading(prev => ({ ...prev, explore: false }));
     }
@@ -207,14 +225,17 @@ const ManageLandPage = () => {
       setSectionLoading(prev => ({ ...prev, register: true }));
       setTransactionStatus({ type: 'pending', message: 'Registering land...' });
       
-      const tx = await contract.methods
+      const receipt = await contract.methods
         .registerLand(plotNumber, area, district, city, state, areaSqYd)
         .send({ from: account, gas: 3000000 });
+      
+      // The code execution pauses here until the transaction is mined into a block.
+      // Once mined, 'receipt' will contain the transaction details.
       
       setTransactionStatus({ 
         type: 'success', 
         message: 'Land registered successfully!',
-        hash: tx.transactionHash
+        hash: receipt.transactionHash // Use the hash from the receipt
       });
       
       setPlotNumber('');
@@ -443,10 +464,11 @@ const ManageLandPage = () => {
   };
 
   return (
-    <div>
+    <div className="app-container">
       <Navbar />
-      <div className="container my-5 pt-5">
-        <h1 className="text-center mb-4 fade-in">Manage Land</h1>
+      <div className="main-content">
+        <div className="container my-5 pt-5">
+          <h1 className="text-center mb-4 fade-in">Manage Land</h1>
         
         {!isConnected ? (
           <div className="text-center">
@@ -474,7 +496,14 @@ const ManageLandPage = () => {
                 )}
               </div>
             )}
-            
+
+            {/* Fetch/Decode Status */}
+            {fetchError && (
+              <div className="alert alert-danger mb-4">
+                <strong>Data load issue:</strong> {fetchError}
+              </div>
+            )}
+
             {/* Action Buttons */}
             <div className="d-flex flex-wrap justify-content-center gap-3 mb-4">
               <button 
@@ -802,7 +831,8 @@ const ManageLandPage = () => {
           </div>
         )}
       </div>
-      <Footer />
+    </div>
+    <Footer />
       
       {/* Confirmation Dialog */}
       <ConfirmationDialog

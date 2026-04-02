@@ -12,14 +12,16 @@ function App() {
   return (
     <WalletProvider>
       <Router basename="/Final-Year-Project">
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/features" element={<FeaturesPage />} />
-          <Route path="/manage-land" element={<ManageLandPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="/admin" element={<AdminPanel />} />
-        </Routes>
+        <div className="app-container"> {/* Start Wrapper */}
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/features" element={<FeaturesPage />} />
+            <Route path="/manage-land" element={<ManageLandPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="/admin" element={<AdminPanel />} />
+          </Routes>
+        </div> {/* End Wrapper */}
       </Router>
     </WalletProvider>
   );

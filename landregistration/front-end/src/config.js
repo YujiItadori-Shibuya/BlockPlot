@@ -1,7 +1,7 @@
 // Configuration settings for the application
 const config = {
     // Contract settings
-    CONTRACT_ADDRESS: process.env.REACT_APP_CONTRACT_ADDRESS || '0x7a659549fC0a6A8f642493393165b69992fD4B13',
+    CONTRACT_ADDRESS: process.env.REACT_APP_CONTRACT_ADDRESS || '0x92Fffe14CDC25Ece0858037Ea1D905d10cced30f',
     ADMIN_ADDRESS: process.env.REACT_APP_ADMIN_ADDRESS || '0x129d7140d2ea226ff47800e776f54019481751bf',
     
     // Network settings
