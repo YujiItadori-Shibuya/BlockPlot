@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../styles.css";
 import Navbar from "./Navbar";
-import Footer from "./Footer";
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -23,9 +22,6 @@ const ContactPage = () => {
 
   return (
     <div>
-      {/* Navbar */}
-      <Navbar />
-
       {/* Contact Content */}
       <div className="container my-5 pt-5">
         <h1 className="text-center mb-4 fade-in">Contact Us</h1>
@@ -60,9 +56,6 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 };

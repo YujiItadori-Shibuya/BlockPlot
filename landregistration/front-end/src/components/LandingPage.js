@@ -5,7 +5,6 @@ import backgroundImage from '../assets/background-image.png';
 import Navbar from './Navbar';
 import About from './About';
 import Features from './Features';
-import Footer from './Footer';
 import { WalletContext } from './WalletContext';
 
 const LandingPage = () => {
@@ -33,7 +32,6 @@ const LandingPage = () => {
       </div>
       <About />
       <Features />
-      <Footer />
     </div>
   );
 };

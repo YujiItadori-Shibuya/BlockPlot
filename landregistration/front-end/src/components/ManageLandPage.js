@@ -2,7 +2,6 @@ import React, { useState, useEffect, useContext, useCallback } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles.css';
 import Navbar from './Navbar';
-import Footer from './Footer';
 import { WalletContext } from './WalletContext';
 import LoadingSpinner from './LoadingSpinner';
 import Tooltip from './Tooltip';
@@ -832,7 +831,6 @@ const ManageLandPage = () => {
         )}
       </div>
     </div>
-    <Footer />
       
       {/* Confirmation Dialog */}
       <ConfirmationDialog

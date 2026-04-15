@@ -140,9 +140,13 @@ body {
 
 /* Footer */
 html,
-body {
+body,
+#root {
   height: 100%;
   margin: 0;
+}
+
+body {
   display: flex;
   flex-direction: column;
 }
@@ -153,12 +157,18 @@ body {
   min-height: 100vh;
 }
 
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .main-content {
-  flex: 1;
+  flex: 1 0 auto;
 }
 
 footer {
-  margin-top: auto;
+  flex-shrink: 0;
 }
 
 /* Footer styling enhancements */
